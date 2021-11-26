@@ -1,6 +1,7 @@
 
 public class Train {
 	private int numberOfEngines = 3;
+	private int trainId;
 	private boolean isIdle = false;
 	private boolean isFull = false;
 	private double CurrentTrainFillLevel = 0.0;
@@ -10,7 +11,8 @@ public class Train {
 	private int demurrage = 5000;
 	private int trainCapacity;
 
-	public Train(int numberOfEngines_, boolean isIdle_, boolean isFull_, double fillLevel_, double arrivalTime_, double departureTime_) {
+	public Train(int numberOfEngines_, boolean isIdle_, boolean isFull_, double fillLevel_, double arrivalTime_,
+			double departureTime_) {
 		numberOfEngines = numberOfEngines_;
 		isIdle = isIdle_;
 		isFull = isFull_;
@@ -23,6 +25,14 @@ public class Train {
 			trainCapacity = 2;
 		}
 
+	}
+
+	public Train(int trainId, int numberOfEngines, boolean isFull, double CurrentTrainFillLevel, double arrivalTime) {
+		this.trainId = trainId;
+		this.numberOfEngines = numberOfEngines;
+		this.isFull = isFull;
+		this.CurrentTrainFillLevel = CurrentTrainFillLevel;
+		this.arrivalTime = arrivalTime;
 	}
 
 	/**
@@ -125,6 +135,17 @@ public class Train {
 		this.demurrageCostTotal = numberOfEngines * demurrage * (int) (Math.abs(departureTime - arrivalTime));
 		return this.demurrageCostTotal;
 
+	}
+
+	public void printInfo() {
+		// TO-DO reflect more information once it is found such as arrival time and cost
+		System.out.printf("%s  ", String.valueOf(this.trainId));
+		System.out.printf("%s  ", String.valueOf(this.numberOfEngines));
+		System.out.printf("%s  ", String.valueOf(this.isFull));
+		System.out.printf("%s  ", String.valueOf(this.CurrentTrainFillLevel));
+		System.out.printf("%s  ", String.valueOf(this.arrivalTime));
+		
+		System.out.println();
 	}
 
 }
