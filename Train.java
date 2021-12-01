@@ -32,6 +32,7 @@ public class Train {
 		this.isFull = isFull;
 		this.CurrentTrainFillLevel = CurrentTrainFillLevel;
 		this.arrivalTime = arrivalTime;
+		this.departureTime = 
 	}
 
 	/**

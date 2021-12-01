@@ -211,11 +211,7 @@ public class CoalSimulator {
 				}
 
 			}
-			hours++;
-			if (hours == 24.0) {
-			hours = 0.0;
-			 days+=1;
-		}
+
 		
 		
 
@@ -234,7 +230,7 @@ public class CoalSimulator {
 
 			} else if (tipple.getCurrentTrain() == null && tipple.getTrainsArrived().size() > 0) {
 				tipple.setCurrentTrain(tipple.getTrainsArrived().get(0));
-			}	break;
+			}	
 //			System.out.println();
 //			System.out.print("Current hour: " + hours + "  tipple fill lvl: " + tipple.getTippleFillLevel());
 //			System.out.print("\n Train A " + " Train B " + " Train C " + " Train HC " + " Crew Fees: " + crewFees);
@@ -253,16 +249,21 @@ public class CoalSimulator {
 //					System.out.print("         ");
 //				}
 //			}
+			hours++;
+			if (hours == 24.0) {
+			hours = 0.0;
+			 days+=1;
+		}
+			if(trainList.get(trainList.size()-1).getDepartureTime()!= -1) {
+				break;
+			}
 
-//			
-
-//			
-
-
-	}
+			
+		}
 		for(Train train : trainList) {
 			train.printInfo();
 			}
 	}
+
 
 }
