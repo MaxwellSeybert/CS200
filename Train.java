@@ -1,4 +1,3 @@
-
 public class Train {
 	private int numberOfEngines = 3;
 	private int trainId;
@@ -144,7 +143,8 @@ public class Train {
 		System.out.printf("%s  ", String.valueOf(this.isFull));
 		System.out.printf("%s  ", String.valueOf(this.CurrentTrainFillLevel));
 		System.out.printf("%s  ", String.valueOf(this.arrivalTime));
-		
+		System.out.printf("%s  ", String.valueOf(this.calculateTrainFees()));
+		System.out.printf("%s  ", String.valueOf(this.departureTime));
 		System.out.println();
 	}
 

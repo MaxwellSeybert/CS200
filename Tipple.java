@@ -117,8 +117,6 @@ public class Tipple {
 		return this.crewCost;
 	}
 
-
-
 	public int loadTipple() {
 		// if the tipple is full boolean is true and the edge case of the fill level
 		// must be the same
@@ -145,7 +143,7 @@ public class Tipple {
 
 	public int fillTrain(double hour) {
 		int demurrageFees = 0;
-		
+
 		if (currentTrain.getNumberOfEngines() == 3) {
 			double fillLevel = this.currentTrain.getFillLevel();
 			this.currentTrain.setFillLevel(fillLevel + (1 / 3.0));
@@ -153,7 +151,7 @@ public class Tipple {
 			tippleFillLevel -= this.currentTrain.getTrainCapacity() * (1 / 3.0);
 			// checks the fill level of the train and departs when full
 			if (currentTrain.getFillLevel() >= 0.99) {
-				tippleFillLevel +=this.currentTrain.getTrainCapacity()-currentTrain.getFillLevel();
+				tippleFillLevel += this.currentTrain.getTrainCapacity() - currentTrain.getFillLevel();
 				currentTrain.setIsFull(true);
 				currentTrain.setDepartureTime(hour);
 				demurrageFees = currentTrain.calculateTrainFees();
@@ -173,12 +171,12 @@ public class Tipple {
 			tippleFillLevel -= tippleCapacity * (1 / 6);
 			// when train is full set to depart
 			if (currentTrain.getFillLevel() >= .99) {
-				tippleFillLevel +=this.currentTrain.getTrainCapacity()-currentTrain.getFillLevel();
+				tippleFillLevel += this.currentTrain.getTrainCapacity() - currentTrain.getFillLevel();
 				currentTrain.setIsFull(true);
 				currentTrain.setDepartureTime(hour);
 				demurrageFees = currentTrain.calculateTrainFees();
 				currentTrain = null;
-				
+
 				if (trainsArrived.size() > 0) {
 					currentTrain = trainsArrived.get(0);
 					trainsArrived.remove(0);

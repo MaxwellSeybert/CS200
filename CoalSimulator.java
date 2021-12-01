@@ -108,6 +108,7 @@ public class CoalSimulator {
 		BufferedReader readBuffer = null;
 		try {
 			// creates a string for the input line then asks the user for the file location
+			//C:\Users\eatca\eclipse-workspace\FinalProject\src\trainInfo1.csv
 			String inputLine;
 			String fileLoc = null;
 			Scanner scnr = new Scanner(System.in);
@@ -149,36 +150,38 @@ public class CoalSimulator {
 		// built in for randomizing arrive and depart attribute
 		Math.random();
 		Random rand = new Random();
-
+		int days=0;
 		double hours = 00.00;
 		if (hours == 0) {
 		}
 		// instance of tipple
 		Tipple tipple = new Tipple();
 		// array list of trains type Train
-		ArrayList<Train> trainList = new ArrayList<Train>();
+	
+		ArrayList<Train> trainList =  createTrainList();
 		while (true) {
-
-			if (hours == 0) {
-				trainList = new ArrayList<Train>();
-				// semi random instances of trains
-				for (int i = 0; i < 3; i++) {
-					double arrive = (double) rand.nextInt(14);
-					double depart = arrive + 8;
-					Train trainOne = new Train(3, false, false, 0.0, arrive + 5, depart);
-
-					trainList.add(trainOne);
-
-				}
-				for (int j = 0; j < 1; j++) {
-					double arriveHC = (double) rand.nextInt(2);
-					double departHC = arriveHC + 16;
-
-					Train trainFourHC = new Train(5, false, false, 0.0, arriveHC + 11, departHC);
-					trainList.add(trainFourHC);
-
-				}
-			}
+			
+//
+//			if (hours == 0) {
+//				trainList = new ArrayList<Train>();
+//				// semi random instances of trains
+//				for (int i = 0; i < 3; i++) {
+//					double arrive = (double) rand.nextInt(14);
+//					double depart = arrive + 8;
+//					Train trainOne = new Train(3, false, false, 0.0, arrive + 5, depart);
+//
+//					trainList.add(trainOne);
+//
+//				}
+//				for (int j = 0; j < 1; j++) {
+//					double arriveHC = (double) rand.nextInt(2);
+//					double departHC = arriveHC + 16;
+//
+//					Train trainFourHC = new Train(5, false, false, 0.0, arriveHC + 11, departHC);
+//					trainList.add(trainFourHC);
+//
+//				}
+			//}
 			// used in fill train(),instantiate variables to pass from tipple
 			int demurrageFees = 0;
 			int crewFees = 0;
@@ -186,6 +189,7 @@ public class CoalSimulator {
 
 			for (Train train : trainList) {
 				// step 1 check trains in train list for high capacity and move to front of list
+			
 				if (train.getArrivalTime() == hours) {
 					arrivedTrain = train;
 				}
@@ -207,6 +211,13 @@ public class CoalSimulator {
 				}
 
 			}
+			hours++;
+			if (hours == 24.0) {
+			hours = 0.0;
+			 days+=1;
+		}
+		
+		
 
 			// step 4 check tipple at zero and rounds to eliminate the decimals
 
@@ -223,36 +234,35 @@ public class CoalSimulator {
 
 			} else if (tipple.getCurrentTrain() == null && tipple.getTrainsArrived().size() > 0) {
 				tipple.setCurrentTrain(tipple.getTrainsArrived().get(0));
+			}	break;
+//			System.out.println();
+//			System.out.print("Current hour: " + hours + "  tipple fill lvl: " + tipple.getTippleFillLevel());
+//			System.out.print("\n Train A " + " Train B " + " Train C " + " Train HC " + " Crew Fees: " + crewFees);
+//			System.out.println();
+//			// tracking the cost of train fees on each train in the list
+//			for (Train train : trainList) {
+//				if (arrivedTrain == train) {
+//					System.out.print(" arrived");
+//					arrivedTrain = null;
+//				} else if (demurrageFees > 0 && train.getDepartureTime() == hours) {
+//					System.out.println(" leaves");
+//					System.out.println(demurrageFees);
+//				}
+//
+//				else {
+//					System.out.print("         ");
+//				}
+//			}
+
+//			
+
+//			
+
+
+	}
+		for(Train train : trainList) {
+			train.printInfo();
 			}
-			System.out.println();
-			System.out.print("Current hour: " + hours + "  tipple fill lvl: " + tipple.getTippleFillLevel());
-			System.out.print("\n Train A " + " Train B " + " Train C " + " Train HC " + " Crew Fees: " + crewFees);
-			System.out.println();
-			// tracking the cost of train fees on each train in the list
-			for (Train train : trainList) {
-				if (arrivedTrain == train) {
-					System.out.print(" arrived");
-					arrivedTrain = null;
-				} else if (demurrageFees > 0 && train.getDepartureTime() == hours) {
-					System.out.println(" leaves");
-					System.out.println(demurrageFees);
-				}
-
-				else {
-					System.out.print("         ");
-				}
-			}
-
-			System.out.println();
-			hours++;
-
-			if (hours == 24.0) {
-				hours = 0.0;
-
-			}
-			Thread.sleep(500);
-			// add STDdraw for graphics
-		}
 	}
 
 }
