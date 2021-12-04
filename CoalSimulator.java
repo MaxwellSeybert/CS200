@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 import java.util.Scanner;
 import java.io.BufferedReader;
@@ -101,6 +102,55 @@ public class CoalSimulator {
 		}
 		return arrlist;
 	}
+	
+	public static <T extends Comparable<T>> ArrayList<Train> sortTrains(ArrayList<Train> trainList, int sortBy){
+		T val1, val2;
+		int length = trainList.size();
+		for (int i = 0; i < length; i++) {
+			int position = i;
+			for(int j = i+1; j<length; j++) {
+				if(sortBy == 1) {
+					Integer tempVal = trainList.get(position).getTrainID();
+					val2 = (T) tempVal;
+					tempVal = trainList.get(j).getTrainID();
+					val1 = (T) tempVal;
+					
+				}
+				else if(sortBy ==2) {
+					Double tempVal = trainList.get(position).getArrivalTime();
+					val2 = (T) tempVal;
+					tempVal = trainList.get(j).getArrivalTime();
+					val1 = (T) tempVal;
+				}
+				else if(sortBy ==3) {
+					Double tempVal = trainList.get(position).getDepartureTime();
+					val2 = (T) tempVal;
+					tempVal = trainList.get(j).getDepartureTime();
+					val1 = (T) tempVal;
+				}
+				else if (sortBy == 4) {
+					Integer tempVal = trainList.get(position).getNumberOfEngines();
+					val2 = (T) tempVal;
+					tempVal = trainList.get(j).getNumberOfEngines();
+					val1 = (T) tempVal;
+				}
+				else {
+					Integer tempVal = trainList.get(position).calculateTrainFees();
+					val2 = (T) tempVal;
+					tempVal = trainList.get(j).calculateTrainFees();
+					val1 = (T) tempVal;
+				}
+				if(val1.compareTo(val2)< 0) {
+					position = j;
+				}
+			}
+			Collections.swap(trainList, i, position);
+			
+		}
+		
+		
+		return(trainList);
+	}
 
 	public static ArrayList<Train> createTrainList() {
 		ArrayList<Train> trainList = new ArrayList<Train>();
@@ -150,6 +200,7 @@ public class CoalSimulator {
 		// built in for randomizing arrive and depart attribute
 		Math.random();
 		Random rand = new Random();
+		Scanner scnr = new Scanner(System.in);
 		int days=0;
 		double hours = 00.00;
 		if (hours == 0) {
@@ -159,6 +210,7 @@ public class CoalSimulator {
 		// array list of trains type Train
 	
 		ArrayList<Train> trainList =  createTrainList();
+		trainList = sortTrains(trainList,2);
 		while (true) {
 			
 //
