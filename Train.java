@@ -32,7 +32,7 @@ public class Train {
 		this.isFull = isFull;
 		this.CurrentTrainFillLevel = CurrentTrainFillLevel;
 		this.arrivalTime = arrivalTime;
-		this.departureTime = 
+		this.departureTime = -1;
 	}
 
 	/**
@@ -128,6 +128,9 @@ public class Train {
 
 	public int getTrainCapacity() {
 		return trainCapacity;
+	}
+	public int getTrainID() {
+		return this.trainId;
 	}
 
 	public int calculateTrainFees() {
