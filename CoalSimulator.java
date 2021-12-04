@@ -260,6 +260,52 @@ public class CoalSimulator {
 
 			
 		}
+				String userInput;
+		int userChoice, searchBy, sortBy;
+		while (true) {
+			try {
+				System.out.println("Would you like to search or sort through the data?");
+				System.out.println("Enter 1 to search and 2 to sort: ");
+				userInput = scnr.next();
+				userChoice = Integer.valueOf(userInput);
+				if (userChoice == 1) {
+					break;
+				}
+				if (userChoice == 2) {
+					break;
+				} else {
+					throw new Exception("1 or 2 not entered");
+				}
+			} catch (Exception e) {
+				System.out.println("Error please enter 1 or 2");
+			}
+		}
+		if (userChoice == 2) {
+			while (true) {
+				try {
+					System.out.println("Enter how you would like to sort the train list");
+					System.out.println("1 - Train ID");
+					System.out.println("2 - Arrival Time");
+					System.out.println("3 - Departure Time");
+					System.out.println("4 - Number of Engines");
+					System.out.println("5 - Demurrage Cost");
+					System.out.println("Enter an integer between 1-5");
+					userInput = scnr.next();
+					sortBy = Integer.valueOf(userInput);
+					if (sortBy > 5) {
+						throw new Exception("index too large");
+					} else if (sortBy < 1) {
+						throw new Exception("index too small");
+					} else {
+						break;
+					}
+
+				} catch (Exception e) {
+					System.out.println("Error please enter an integer between 1-5");
+				}
+			}
+			sortTrains(trainList, sortBy);
+		}
 		for(Train train : trainList) {
 			train.printInfo();
 			}
