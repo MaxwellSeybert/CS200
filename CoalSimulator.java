@@ -227,11 +227,13 @@ public class CoalSimulator {
 			String inputLine;
 			String fileLoc = null;
 			Scanner scnr = new Scanner(System.in);
-			System.out.println("Welcome to train cost optimizer!");
 			System.out.println("To run this program a CSV file will be needed with the following format");
 			// TO-DO make this be more informative on what info is needed
-			System.out.println(
-					"Column 1 - Train ID (integer)   Column 2 - Number of Engines(integer)  Column 3 - isFull(boolean) Column 4 - fillLevel (double between 0 -1.5) Column 4 - Arrival Time (number between 1 - 24)");
+			System.out.println("Column - 1        Column - 2        Column - 3");
+			System.out.println("Train ID       Number of Engines    Arrival Time");
+			System.out.println("Train ID must be an integer value, Do not give multiple trains the same ID number ");
+			System.out.println("The number of engines must either be an integer with the value 3 or 5. As the trains in this simulation can only have 3 or 5 engines.");
+			System.out.println("The arrival time must be a number between 0-24, please not that all trains entered in the CSV will be treated as arriving on the same day.");
 			System.out.println("Enter the file location of your train information:");
 			// takes in teh file location
 			fileLoc = scnr.nextLine();
@@ -244,10 +246,8 @@ public class CoalSimulator {
 					data = CSVtoArrayList(inputLine);
 					int trainId = Integer.valueOf(data.get(0));
 					int numberOfEngines = Integer.valueOf(data.get(1));
-					boolean isFull = Boolean.valueOf(data.get(2));
-					double fillLevel = Double.valueOf(data.get(3));
-					double arriveTime = Double.valueOf(data.get(4));
-					trainList.add(new Train(trainId, numberOfEngines, isFull, fillLevel, arriveTime));
+					double arriveTime = Double.valueOf(data.get(2));
+					trainList.add(new Train(trainId, numberOfEngines, arriveTime));
 				}
 				lineCount++;
 
@@ -268,8 +268,10 @@ public class CoalSimulator {
 		Scanner scnr = new Scanner(System.in);
 		int days = 0;
 		double hours = 00.00;
-		if (hours == 0) {
-		}
+		System.out.println("Welcome to the Coal Tipple Opertations Train program");
+		System.out.println("This program is designed to find the costs of the trains arriving at a coal mine then being filled with coal.");
+		System.out.println("Please this is done by seeing how much coal the train will be able to carry, when it arrives, and how long it will take to fill.");
+		System.out.println("If a train arrives while another one is waiting, it has to wait and accures demurrage costs while waiting for the other train to fill up.");
 		// instance of tipple
 		Tipple tipple = new Tipple();
 		// array list of trains type Train
@@ -481,6 +483,11 @@ public class CoalSimulator {
 				}
 			}
 			sortTrains(trainList, sortBy);
+			System.out.printf("%-17s  ", "Train ID");
+			System.out.printf("%-17s  ", "Number of Engines");
+			System.out.printf("%-17s  ", "Arrival Time");
+			System.out.printf("%-17s  ", "Train Fees");
+			System.out.printf("%-17s  \n", "Departure Time");
 			for (Train train : trainList) {
 				train.printInfo();
 			}
