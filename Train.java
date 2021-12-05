@@ -142,13 +142,11 @@ public class Train {
 
 	public void printInfo() {
 		// TO-DO reflect more information once it is found such as arrival time and cost
-		System.out.printf("%s  ", String.valueOf(this.trainId));
-		System.out.printf("%s  ", String.valueOf(this.numberOfEngines));
-		System.out.printf("%s  ", String.valueOf(this.isFull));
-		System.out.printf("%s  ", String.valueOf(this.CurrentTrainFillLevel));
-		System.out.printf("%s  ", String.valueOf(this.arrivalTime));
-		System.out.printf("%s  ", String.valueOf(this.calculateTrainFees()));
-		System.out.printf("%s  ", String.valueOf(this.departureTime));
+		System.out.printf("%-17s  ", String.valueOf(this.trainId));
+		System.out.printf("%-17s  ", String.valueOf(this.numberOfEngines));
+		System.out.printf("%-17s  ", String.valueOf(this.arrivalTime));
+		System.out.printf("%-17s  ", String.valueOf(this.calculateTrainFees()));
+		System.out.printf("%-17s  ", String.valueOf(this.departureTime));
 		System.out.println();
 	}
 
