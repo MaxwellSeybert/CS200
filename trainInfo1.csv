@@ -1,8 +1,11 @@
-Train ID,Number of Engines,isFull,fill Level,Arrival Time
-1,3,FALSE,0.5,1500
-2,3,FALSE,0.25,1200
-3,5,FALSE,1.2,1000
-4,3,TRUE,1,1300
-5,5,FALSE,1,1400
-6,3,FALSE,0.03,700
-7,3,FALSE,0.57,100
+Train ID	Number of Engines	Arrival Time
+1	3	15
+2	3	5
+3	5	7
+4	3	8
+5	5	12
+6	3	1
+7	3	20
+8	3	22
+9	5	14
+10	5	3
