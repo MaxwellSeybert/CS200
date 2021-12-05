@@ -102,54 +102,119 @@ public class CoalSimulator {
 		}
 		return arrlist;
 	}
-	
-	public static <T extends Comparable<T>> ArrayList<Train> sortTrains(ArrayList<Train> trainList, int sortBy){
+
+	public static <T extends Comparable<T>> ArrayList<Train> sortTrains(ArrayList<Train> trainList, int sortBy) {
 		T val1, val2;
 		int length = trainList.size();
 		for (int i = 0; i < length; i++) {
 			int position = i;
-			for(int j = i+1; j<length; j++) {
-				if(sortBy == 1) {
+			for (int j = i + 1; j < length; j++) {
+				if (sortBy == 1) {
 					Integer tempVal = trainList.get(position).getTrainID();
 					val2 = (T) tempVal;
 					tempVal = trainList.get(j).getTrainID();
 					val1 = (T) tempVal;
-					
-				}
-				else if(sortBy ==2) {
+
+				} else if (sortBy == 2) {
 					Double tempVal = trainList.get(position).getArrivalTime();
 					val2 = (T) tempVal;
 					tempVal = trainList.get(j).getArrivalTime();
 					val1 = (T) tempVal;
-				}
-				else if(sortBy ==3) {
+				} else if (sortBy == 3) {
 					Double tempVal = trainList.get(position).getDepartureTime();
 					val2 = (T) tempVal;
 					tempVal = trainList.get(j).getDepartureTime();
 					val1 = (T) tempVal;
-				}
-				else if (sortBy == 4) {
+				} else if (sortBy == 4) {
 					Integer tempVal = trainList.get(position).getNumberOfEngines();
 					val2 = (T) tempVal;
 					tempVal = trainList.get(j).getNumberOfEngines();
 					val1 = (T) tempVal;
-				}
-				else {
+				} else {
 					Integer tempVal = trainList.get(position).calculateTrainFees();
 					val2 = (T) tempVal;
 					tempVal = trainList.get(j).calculateTrainFees();
 					val1 = (T) tempVal;
 				}
-				if(val1.compareTo(val2)< 0) {
+				if (val1.compareTo(val2) < 0) {
 					position = j;
 				}
 			}
 			Collections.swap(trainList, i, position);
-			
+
 		}
-		
-		
-		return(trainList);
+
+		return (trainList);
+	}
+
+	public static <T extends Comparable<T>> void search(ArrayList<Train> trainList, int searchBy, T searchTerm) {
+		int location;
+		T compareVal;
+		int length = trainList.size();
+		int i = 0;
+
+		if (searchBy == 1) {
+			while (i < length + 1) {
+				if (i == length) {
+					System.out.println("Nothing with that search term was found. Exiting.");
+					break;
+				} else {
+					Integer tempVal = trainList.get(i).getTrainID();
+					compareVal = (T) tempVal;
+					if (compareVal.equals(searchTerm)) {
+						System.out.printf("%-17s  ", "Train ID");
+						System.out.printf("%-17s  ", "Number of Engines");
+						System.out.printf("%-17s  ", "Arrival Time");
+						System.out.printf("%-17s  ", "Train Fees");
+						System.out.printf("%-17s  \n", "Departure Time");
+						trainList.get(i).printInfo();
+						break;
+					}
+				}
+				i++;
+			}
+		} else if (searchBy == 2) {
+			while (i < length + 1) {
+				if (i == length) {
+					System.out.println("Nothing with that search term was found. Exiting.");
+					break;
+				} else {
+					Double tempVal = trainList.get(i).getArrivalTime();
+					compareVal = (T) tempVal;
+					if (compareVal.equals(searchTerm)) {
+						System.out.printf("%-17s  ", "Train ID");
+						System.out.printf("%-17s  ", "Number of Engines");
+						System.out.printf("%-17s  ", "Arrival Time");
+						System.out.printf("%-17s  ", "Train Fees");
+						System.out.printf("%-17s  \n", "Departure Time");
+						trainList.get(i).printInfo();
+						break;
+					}
+				}
+				i++;
+			}
+		} else {
+			while (i < length + 1) {
+				if (i == length) {
+					System.out.println("Nothing with that search term was found. Exiting.");
+					break;
+				} else {
+					Double tempVal = trainList.get(i).getDepartureTime();
+					compareVal = (T) tempVal;
+					if (compareVal.equals(searchTerm)) {
+						System.out.printf("%-17s  ", "Train ID");
+						System.out.printf("%-17s  ", "Number of Engines");
+						System.out.printf("%-17s  ", "Arrival Time");
+						System.out.printf("%-17s  ", "Train Fees");
+						System.out.printf("%-17s  \n", "Departure Time");
+						trainList.get(i).printInfo();
+						break;
+					}
+				}
+				i++;
+			}
+		}
+
 	}
 
 	public static ArrayList<Train> createTrainList() {
@@ -158,7 +223,7 @@ public class CoalSimulator {
 		BufferedReader readBuffer = null;
 		try {
 			// creates a string for the input line then asks the user for the file location
-			//C:\Users\eatca\eclipse-workspace\FinalProject\src\trainInfo1.csv
+			// C:\Users\eatca\eclipse-workspace\FinalProject\src\trainInfo1.csv
 			String inputLine;
 			String fileLoc = null;
 			Scanner scnr = new Scanner(System.in);
@@ -201,18 +266,18 @@ public class CoalSimulator {
 		Math.random();
 		Random rand = new Random();
 		Scanner scnr = new Scanner(System.in);
-		int days=0;
+		int days = 0;
 		double hours = 00.00;
 		if (hours == 0) {
 		}
 		// instance of tipple
 		Tipple tipple = new Tipple();
 		// array list of trains type Train
-	
-		ArrayList<Train> trainList =  createTrainList();
-		trainList = sortTrains(trainList,2);
+
+		ArrayList<Train> trainList = createTrainList();
+		trainList = sortTrains(trainList, 2);
 		while (true) {
-			
+
 //
 //			if (hours == 0) {
 //				trainList = new ArrayList<Train>();
@@ -233,7 +298,7 @@ public class CoalSimulator {
 //					trainList.add(trainFourHC);
 //
 //				}
-			//}
+			// }
 			// used in fill train(),instantiate variables to pass from tipple
 			int demurrageFees = 0;
 			int crewFees = 0;
@@ -241,7 +306,7 @@ public class CoalSimulator {
 
 			for (Train train : trainList) {
 				// step 1 check trains in train list for high capacity and move to front of list
-			
+
 				if (train.getArrivalTime() == hours) {
 					arrivedTrain = train;
 				}
@@ -264,9 +329,6 @@ public class CoalSimulator {
 
 			}
 
-		
-		
-
 			// step 4 check tipple at zero and rounds to eliminate the decimals
 
 			if (Math.round(tipple.getTippleFillLevel() * 100) / 100 <= 0 || tipple.getCurrentTrain() == null) {
@@ -282,7 +344,7 @@ public class CoalSimulator {
 
 			} else if (tipple.getCurrentTrain() == null && tipple.getTrainsArrived().size() > 0) {
 				tipple.setCurrentTrain(tipple.getTrainsArrived().get(0));
-			}	
+			}
 //			System.out.println();
 //			System.out.print("Current hour: " + hours + "  tipple fill lvl: " + tipple.getTippleFillLevel());
 //			System.out.print("\n Train A " + " Train B " + " Train C " + " Train HC " + " Crew Fees: " + crewFees);
@@ -303,16 +365,15 @@ public class CoalSimulator {
 //			}
 			hours++;
 			if (hours == 24.0) {
-			hours = 0.0;
-			 days+=1;
-		}
-			if(trainList.get(trainList.size()-1).getDepartureTime()!= -1) {
+				hours = 0.0;
+				days += 1;
+			}
+			if (trainList.get(trainList.size() - 1).getDepartureTime() != -1) {
 				break;
 			}
 
-			
 		}
-				String userInput;
+		String userInput;
 		int userChoice, searchBy, sortBy;
 		while (true) {
 			try {
@@ -331,6 +392,69 @@ public class CoalSimulator {
 			} catch (Exception e) {
 				System.out.println("Error please enter 1 or 2");
 			}
+		}
+		if (userChoice == 1) {
+			while (true) {
+				try {
+					System.out.println("How would you like to search");
+					System.out.println("1 - Train ID");
+					System.out.println("2 - Arrival Time");
+					System.out.println("3 - Departure Time");
+					System.out.println("Enter an integer between 1-3: ");
+					userInput = scnr.next();
+					searchBy = Integer.valueOf(userInput);
+					if (searchBy > 3) {
+						throw new Exception("index too large");
+					} else if (searchBy < 1) {
+						throw new Exception("index too small");
+					} else {
+						break;
+					}
+				} catch (Exception e) {
+					System.out.println("Error please enter an integer between 1-3");
+				}
+			}
+			if (searchBy == 1) {
+				while (true) {
+
+					try {
+						System.out.println("Enter a train ID to search: ");
+						userInput = scnr.next();
+						Integer searchTerm = Integer.valueOf(userInput);
+						search(trainList, searchBy, searchTerm);
+						break;
+					} catch (Exception e) {
+						System.out.println("Integer train ID not entered, try again");
+					}
+				}
+			} else if (searchBy == 2) {
+				while (true) {
+
+					try {
+						System.out.println("Enter an Arrival time to search: ");
+						Double searchTerm = scnr.nextDouble();
+						search(trainList, searchBy, searchTerm);
+						break;
+					} catch (Exception e) {
+						System.out.println("Valid arrival time not entered, try again");
+					}
+				}
+			} else {
+				while (true) {
+
+					try {
+						System.out.println("Enter a Departure time to search: ");
+						Double searchTerm = scnr.nextDouble();
+						
+						search(trainList, searchBy, searchTerm);
+						break;
+					} catch (Exception e) {
+						System.out.println("Valid departure time not entered, try again");
+					}
+				}
+
+			}
+
 		}
 		if (userChoice == 2) {
 			while (true) {
@@ -357,11 +481,11 @@ public class CoalSimulator {
 				}
 			}
 			sortTrains(trainList, sortBy);
-		}
-		for(Train train : trainList) {
-			train.printInfo();
+			for (Train train : trainList) {
+				train.printInfo();
 			}
-	}
+		}
 
+	}
 
 }
