@@ -26,11 +26,10 @@ public class Train {
 
 	}
 
-	public Train(int trainId, int numberOfEngines, boolean isFull, double CurrentTrainFillLevel, double arrivalTime) {
+	public Train(int trainId, int numberOfEngines, double arrivalTime) {
 		this.trainId = trainId;
 		this.numberOfEngines = numberOfEngines;
-		this.isFull = isFull;
-		this.CurrentTrainFillLevel = CurrentTrainFillLevel;
+
 		this.arrivalTime = arrivalTime;
 		this.departureTime = -1;
 	}
@@ -129,6 +128,7 @@ public class Train {
 	public int getTrainCapacity() {
 		return trainCapacity;
 	}
+
 	public int getTrainID() {
 		return this.trainId;
 	}
